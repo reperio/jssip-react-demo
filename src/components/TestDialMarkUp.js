@@ -118,6 +118,19 @@ class TestDialMarkUp extends Component {
         >
           #
         </button>
+        <div className="round-button">
+          <div className="round-button-circle">
+            <a
+              href="#"
+              onClick={(e) => {
+                this.sendDTMF(e, "1");
+              }}
+              className="round-button"
+            >
+              1
+            </a>
+          </div>
+        </div>
       </Fragment>
     );
   }
