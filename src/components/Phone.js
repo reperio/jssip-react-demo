@@ -74,12 +74,12 @@ class Phone extends Component {
     const callStatus = this.state.call.status;
     const sipStatus = this.state.sip.status;
 
-    let testDialMarkup;
-    if (callStatus === "callStatus/ACTIVE") {
-      testDialMarkup = <p>Dialpad Ready</p>;
-    } else {
-      testDialMarkup = <p>Dialpad Not Ready</p>;
-    }
+    // let testDialMarkup;
+    // if (callStatus === "callStatus/ACTIVE") {
+    //   testDialMarkup = <p>Dialpad Ready</p>;
+    // } else {
+    //   testDialMarkup = <p>Dialpad Not Ready</p>;
+    // }
 
     return (
       <div className="App">
@@ -91,8 +91,9 @@ class Phone extends Component {
         <a href="#" onClick={this.stopCall}>
           End Call
         </a>
-        {testDialMarkup}
-        <TestDialMarkUp sendDTMF={this.context.sendDTMF} />
+        <div>
+          <TestDialMarkUp sendDTMF={this.context.sendDTMF} />
+        </div>
       </div>
     );
   }
