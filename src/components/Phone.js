@@ -52,14 +52,18 @@ class Phone extends Component {
 
     let disableButton;
     let disableHangUpButton;
+    let disableCallButton;
 
     if (callStatus === "callStatus/ACTIVE") {
       disableButton = false;
       disableHangUpButton = false;
+      disableCallButton = true;
     } else if (callStatus === "callStatus/STARTING") {
       disableButton = true;
       disableHangUpButton = false;
+      disableCallButton = true;
     } else {
+      disableCallButton = false;
       disableButton = true;
       disableHangUpButton = true;
     }
@@ -223,7 +227,7 @@ class Phone extends Component {
           </div>
           <div className="btns-control mt-3 mb-3">
             <button
-              disabled={!disableButton}
+              disabled={disableCallButton}
               type="button"
               id="callbtn"
               className="btn btn-lg btn-success btn-call"
