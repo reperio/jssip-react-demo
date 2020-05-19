@@ -23,14 +23,10 @@ class home extends ReactQueryParams {
     //Values from redux state
     const { user, password } = this.props.sip;
 
-    //String to number
-    const port = parseInt(decodeURIComponent(this.queryParams.port));
-    const host = decodeURIComponent(this.queryParams.host);
-
     return (
       <SipProvider
-        host={host}
-        port={port}
+        host={decodeURIComponent(this.queryParams.host)}
+        port={parseInt(decodeURIComponent(this.queryParams.port))}
         pathname="/ws" // Path in socket URI (e.g. wss://sip.example.com:7443/ws); "" by default
         user={decodeURIComponent(this.queryParams.user)}
         password={decodeURIComponent(this.queryParams.password)} // usually required (e.g. from ENV or props)
@@ -53,7 +49,7 @@ class home extends ReactQueryParams {
         ]}
         debug={true} // whether to output events to console; false by default
       >
-        <Phone />
+        <Phone destination={decodeURIComponent(this.queryParams.destination)} />
       </SipProvider>
     );
   }
