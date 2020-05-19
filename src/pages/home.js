@@ -9,27 +9,20 @@ import Phone from "../components/Phone";
 //Redux
 import { connect } from "react-redux";
 
-// const initialAppState = {
-//     selected: "Nothing"
-//   };
-
-// const ContextContainer = React.createContext(null);
-
 class home extends ReactQueryParams {
   constructor(props, context) {
     super(props, context);
   }
   render() {
-    //Values from redux state
-    const { user, password } = this.props.sip;
-
     return (
       <SipProvider
-        host={decodeURIComponent(this.queryParams.host)}
-        port={parseInt(decodeURIComponent(this.queryParams.port))}
+        host={
+          decodeURIComponent(this.queryParams.host) || "sip.testtesttest.test"
+        }
+        port={parseInt(decodeURIComponent(this.queryParams.port || 1234))}
         pathname="/ws" // Path in socket URI (e.g. wss://sip.example.com:7443/ws); "" by default
-        user={decodeURIComponent(this.queryParams.user)}
-        password={decodeURIComponent(this.queryParams.password)} // usually required (e.g. from ENV or props)
+        user={decodeURIComponent(this.queryParams.user || "user")}
+        password={decodeURIComponent(this.queryParams.password || "pass")} // usually required (e.g. from ENV or props)
         autoRegister={true} // true by default, see jssip.UA option register
         autoAnswer={false} // automatically answer incoming calls; false by default
         iceRestart={false} // force ICE session to restart on every WebRTC call; false by default
@@ -49,7 +42,11 @@ class home extends ReactQueryParams {
         ]}
         debug={true} // whether to output events to console; false by default
       >
-        <Phone destination={decodeURIComponent(this.queryParams.destination)} />
+        <Phone
+          destination={decodeURIComponent(
+            this.queryParams.destination || "11234567890"
+          )}
+        />
       </SipProvider>
     );
   }
