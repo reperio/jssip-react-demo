@@ -53,13 +53,13 @@ class Phone extends Component {
 
   startCall(e) {
     e.preventDefault();
-    console.log("The link was clicked.");
+    console.log("startCall was clicked.");
     this.context.startCall("16143543760");
   }
 
   stopCall(e) {
     e.preventDefault();
-    console.log("The link was clicked.");
+    console.log("stopCall was clicked.");
     this.context.stopCall();
   }
 
@@ -81,67 +81,12 @@ class Phone extends Component {
 
     let updatedCallStatus = callStatus;
     let updatedSipStatus = sipStatus;
-    let dialMarkip;
 
-    //If call is active, show dialpad 1
-    if (callStatus === "callStatus/ACTIVE") {
-      dialMarkip = (
-        <>
-          <button href="#" onClick={this.sendDTMFOne}>
-            1
-          </button>
-          <button
-            href="#"
-            onClick={(e) => {
-              this.sendDTMF(e, "3");
-            }}
-          >
-            2
-          </button>
-          <button
-            href="#"
-            onClick={(e) => {
-              this.sendDTMF(e, "3");
-            }}
-          >
-            3
-          </button>
-          <button
-            href="#"
-            onClick={(e) => {
-              this.sendDTMF(e, "4");
-            }}
-          >
-            4
-          </button>
-          <button
-            href="#"
-            onClick={(e) => {
-              this.sendDTMF(e, "5");
-            }}
-          >
-            5
-          </button>
-          <button
-            href="#"
-            onClick={(e) => {
-              this.sendDTMF(e, "6");
-            }}
-          >
-            6
-          </button>
-        </>
-      );
-    } else {
-      dialMarkip = <p>Start call to activate dialpad 1</p>;
-    }
-
-    //If call is active, show dialpad 2
     let testDialMarkip;
     if (callStatus === "callStatus/ACTIVE") {
       testDialMarkip = <TestDialMarkUp sendDTMF={this.context.sendDTMF} />;
     } else {
-      testDialMarkip = <p>Start call to activate dialpad 2</p>;
+      testDialMarkip = <p>Start call to activate dialpad </p>;
       //disabled dialpad
     }
 
@@ -149,7 +94,7 @@ class Phone extends Component {
       <div className="App">
         <p>{updatedCallStatus}</p>
         <p>{updatedSipStatus}</p>
-        <div>{dialMarkip}</div>
+
         <div>{testDialMarkip}</div>
         <a href="#" onClick={this.startCall}>
           Start Call

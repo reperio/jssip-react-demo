@@ -19,7 +19,7 @@ class TestDialMarkUp extends Component {
 
   render() {
     return (
-      <>
+      <Fragment>
         <button
           href="#"
           onClick={(e) => {
@@ -125,7 +125,7 @@ class TestDialMarkUp extends Component {
             </a>
           </div>
         </div>
-      </>
+      </Fragment>
     );
   }
 }
