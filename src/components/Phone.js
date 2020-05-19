@@ -29,10 +29,8 @@ class Phone extends Component {
   };
 
   componentDidUpdate() {
-    console.log(this.context.call);
     if (this.context.call !== this.state.call) {
       this.setState({
-        //   sip: this.context.sip,
         call: this.context.call,
       });
     }
@@ -45,7 +43,6 @@ class Phone extends Component {
 
   componentDidMount() {
     this.setState({
-      //   sip: this.context.sip,
       call: this.context.call,
       sip: this.context.sip,
     });
@@ -53,13 +50,11 @@ class Phone extends Component {
 
   startCall(e) {
     e.preventDefault();
-    console.log("startCall was clicked.");
     this.context.startCall("16143543760");
   }
 
   stopCall(e) {
     e.preventDefault();
-    console.log("stopCall was clicked.");
     this.context.stopCall();
   }
 
@@ -87,7 +82,6 @@ class Phone extends Component {
       testDialMarkip = <TestDialMarkUp sendDTMF={this.context.sendDTMF} />;
     } else {
       testDialMarkip = <p>Start call to activate dialpad </p>;
-      //disabled dialpad
     }
 
     return (

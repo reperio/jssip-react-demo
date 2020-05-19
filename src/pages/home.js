@@ -51,7 +51,7 @@ class home extends ReactQueryParams {
             ],
           },
         ]}
-        debug={false} // whether to output events to console; false by default
+        debug={true} // whether to output events to console; false by default
       >
         <Phone />
       </SipProvider>
