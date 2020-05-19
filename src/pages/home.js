@@ -21,12 +21,11 @@ class home extends ReactQueryParams {
   }
   render() {
     //Values from redux state
-    const { host, user, password } = this.props.sip;
+    const { user, password } = this.props.sip;
 
     //String to number
     const port = parseInt(decodeURIComponent(this.queryParams.port));
-    const host1 = decodeURIComponent(this.queryParams.host);
-    console.log(host1);
+    const host = decodeURIComponent(this.queryParams.host);
 
     return (
       <SipProvider
