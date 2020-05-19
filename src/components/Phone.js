@@ -48,6 +48,8 @@ class Phone extends Component {
     });
   }
 
+  //Enter phone number here
+  //"16143541111"
   startCall(e) {
     e.preventDefault();
     this.context.startCall("16143543760");
