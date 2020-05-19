@@ -74,28 +74,25 @@ class Phone extends Component {
     const callStatus = this.state.call.status;
     const sipStatus = this.state.sip.status;
 
-    let updatedCallStatus = callStatus;
-    let updatedSipStatus = sipStatus;
-
-    let testDialMarkip;
+    let testDialMarkup;
     if (callStatus === "callStatus/ACTIVE") {
-      testDialMarkip = <TestDialMarkUp sendDTMF={this.context.sendDTMF} />;
+      testDialMarkup = <p>Dialpad Ready</p>;
     } else {
-      testDialMarkip = <p>Start call to activate dialpad </p>;
+      testDialMarkup = <p>Dialpad Not Ready</p>;
     }
 
     return (
       <div className="App">
-        <p>{updatedCallStatus}</p>
-        <p>{updatedSipStatus}</p>
-
-        <div>{testDialMarkip}</div>
+        <p>{callStatus}</p>
+        <p>{sipStatus}</p>
         <a href="#" onClick={this.startCall}>
           Start Call
         </a>
         <a href="#" onClick={this.stopCall}>
           End Call
         </a>
+        {testDialMarkup}
+        <TestDialMarkUp sendDTMF={this.context.sendDTMF} />
       </div>
     );
   }

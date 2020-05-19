@@ -118,13 +118,6 @@ class TestDialMarkUp extends Component {
         >
           #
         </button>
-        <div className="round-button">
-          <div className="round-button-circle">
-            <a href="#" className="round-button">
-              Button!!
-            </a>
-          </div>
-        </div>
       </Fragment>
     );
   }
