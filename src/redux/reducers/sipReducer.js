@@ -1,4 +1,4 @@
-import { START_CALL, END_CALL, SUCCESS_CALL } from "../types";
+import { START_CALL, SUCCESS_CALL } from "../types";
 
 const initialState = {
   host: "sip.reper.io",

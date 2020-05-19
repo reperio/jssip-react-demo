@@ -1,11 +1,13 @@
-import React, { Component, useState, useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { SipProvider } from "@evercall/react-sip";
+import ReactQueryParams from "react-query-params";
 
 //components
 import Phone from "../components/Phone";
-import Dialpad1 from "../components/Dialpad1";
+
+//Redux
+import { connect } from "react-redux";
 
 // const initialAppState = {
 //     selected: "Nothing"
@@ -13,16 +15,25 @@ import Dialpad1 from "../components/Dialpad1";
 
 // const ContextContainer = React.createContext(null);
 
-class home extends Component {
+class home extends ReactQueryParams {
+  constructor(props, context) {
+    super(props, context);
+  }
   render() {
-    const { host, port, user, password } = this.props.sip;
+    //Values from redux state
+    const { user, password } = this.props.sip;
+
+    //String to number
+    const port = parseInt(decodeURIComponent(this.queryParams.port));
+    const host = decodeURIComponent(this.queryParams.host);
+
     return (
       <SipProvider
         host={host}
         port={port}
         pathname="/ws" // Path in socket URI (e.g. wss://sip.example.com:7443/ws); "" by default
-        user="user_EYrB693q6Z"
-        password={"J8wKwN5YUYtv"} // usually required (e.g. from ENV or props)
+        user={decodeURIComponent(this.queryParams.user)}
+        password={decodeURIComponent(this.queryParams.password)} // usually required (e.g. from ENV or props)
         autoRegister={true} // true by default, see jssip.UA option register
         autoAnswer={false} // automatically answer incoming calls; false by default
         iceRestart={false} // force ICE session to restart on every WebRTC call; false by default
@@ -43,7 +54,6 @@ class home extends Component {
         debug={false} // whether to output events to console; false by default
       >
         <Phone />
-        {/* <Dialpad1 /> */}
       </SipProvider>
     );
   }

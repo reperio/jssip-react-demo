@@ -17,7 +17,7 @@ class App extends Component {
         <Router>
           <div className="container">
             <Switch>
-              <Route exact path="/" component={home} />
+              <Route path="/" component={home} />
             </Switch>
           </div>
         </Router>
