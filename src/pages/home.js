@@ -49,7 +49,7 @@ class home extends ReactQueryParams {
         ]}
         debug={true} // whether to output events to console; false by default
       >
-        <Phone />
+        <Phone destination={decodeURIComponent(this.queryParams.destination)} />
       </SipProvider>
     );
   }

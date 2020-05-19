@@ -5,7 +5,7 @@ import "./style.css";
 import "./bootstrap.min.css";
 
 class Phone extends Component {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
     this.sendDTMF = this.sendDTMF.bind(this);
     this.stopCall = this.stopCall.bind(this);
@@ -21,13 +21,12 @@ class Phone extends Component {
     startCall: PropTypes.func,
     stopCall: PropTypes.func,
     sendDTMF: PropTypes.func,
+    destination: PropTypes.object,
   };
 
-  //Enter phone number here
-  //"16143541111"
   startCall(e) {
     e.preventDefault();
-    this.context.startCall("16143543760");
+    this.context.startCall(this.props.destination);
   }
 
   stopCall(e) {
@@ -41,28 +40,29 @@ class Phone extends Component {
     this.context.sendDTMF(number, 100, 70);
   }
 
-  sendDTMFOne(e) {
-    e.preventDefault();
-    console.log("1 sent");
-    this.context.sendDTMF(1, 100, 70);
-  }
+  // sendDTMFOne(e) {
+  //   e.preventDefault();
+  //   console.log("1 sent");
+  //   this.context.sendDTMF(1, 100, 70);
+  // }
 
   render() {
     const callStatus = this.context.call.status;
     const sipStatus = this.context.sip.status;
 
     let disableButton;
+    let disableHangUpButton;
+
     if (callStatus === "callStatus/ACTIVE") {
       disableButton = false;
+      disableHangUpButton = false;
+    } else if (callStatus === "callStatus/STARTING") {
+      disableButton = true;
+      disableHangUpButton = false;
     } else {
       disableButton = true;
+      disableHangUpButton = true;
     }
-    // let testDialMarkup;
-    // if (callStatus === "callStatus/ACTIVE") {
-    //   testDialMarkup = <p>Dialpad Ready</p>;
-    // } else {
-    //   testDialMarkup = <p>Dialpad Not Ready</p>;
-    // }
 
     return (
       <Fragment>
@@ -232,7 +232,7 @@ class Phone extends Component {
               Call
             </button>
             <button
-              disabled={disableButton}
+              disabled={disableHangUpButton}
               type="button"
               id="hangupbtn"
               className="btn btn-lg btn-danger btn-hangup"
