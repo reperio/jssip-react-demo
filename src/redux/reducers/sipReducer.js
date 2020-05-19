@@ -1,7 +1,7 @@
 import { START_CALL, SUCCESS_CALL } from "../types";
 
 const initialState = {
-  host: "sip.reper.io",
+  host: "",
   port: 5065,
   pathname: "/ws",
   user: "",
