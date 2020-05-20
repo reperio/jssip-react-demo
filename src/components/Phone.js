@@ -10,6 +10,9 @@ class Phone extends Component {
     this.sendDTMF = this.sendDTMF.bind(this);
     this.stopCall = this.stopCall.bind(this);
     this.startCall = this.startCall.bind(this);
+
+    //context.call.toggleHold.bind(this);
+    this.toggleMuteMicrophone = context.call.toggleMuteMicrophone.bind(this);
   }
 
   static contextTypes = {
@@ -40,6 +43,11 @@ class Phone extends Component {
     this.context.sendDTMF(number, 100, 70);
   }
 
+  toggleMute(e) {
+    e.preventDefault();
+    this.context.call.toggleMuteMicrophone();
+  }
+
   // sendDTMFOne(e) {
   //   e.preventDefault();
   //   console.log("1 sent");
@@ -63,9 +71,18 @@ class Phone extends Component {
       disableHangUpButton = false;
       disableCallButton = true;
     } else {
-      disableCallButton = false;
       disableButton = true;
       disableHangUpButton = true;
+      disableCallButton = false;
+    }
+
+    const muteStatus = this.context.call.microphoneIsMuted;
+    let muteMarkup;
+
+    if (muteStatus === false) {
+      muteMarkup = "Mute";
+    } else {
+      muteMarkup = "UnMute";
     }
 
     return (
@@ -243,6 +260,16 @@ class Phone extends Component {
               onClick={this.stopCall}
             >
               Hang up
+            </button>
+          </div>
+          <div className="btns-control mt-3 mb-3">
+            <button
+              type="button"
+              id="callbtn"
+              className="btn btn-lg btn-success btn-call"
+              onClick={this.toggleMuteMicrophone}
+            >
+              {muteMarkup}
             </button>
           </div>
         </div>
